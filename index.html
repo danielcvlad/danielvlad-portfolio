@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Daniel Vlad — DevOps Engineer & Cloud Solutions Architect. I help engineering teams ship on Azure without rebuilding their stack. 6 Azure certifications. Munich-based, working globally.">
+<meta name="keywords" content="DevOps, Azure, Kubernetes, Terraform, Bicep, Cloud Architect, CI/CD, Munich, Freelance">
+<meta name="author" content="Daniel Vlad">
+<meta property="og:title" content="Daniel Vlad — DevOps Engineer & Cloud Solutions Architect">
+<meta property="og:description" content="I help engineering teams ship on Azure without rebuilding their stack. 4+ years shipping infrastructure for Microsoft, Roland Berger, and Orange.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://danielvlad.com">
+<meta property="og:image" content="https://danielvlad.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daniel Vlad — DevOps & Cloud Architect">
+<meta name="twitter:description" content="I help engineering teams ship on Azure without rebuilding their stack.">
+<title>Daniel Vlad — DevOps Engineer & Cloud Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script defer data-domain="danielvlad.com" src="https://plausible.io/js/script.js"></script>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-surface: #1a1a1a;
+  --bg-surface-hover: #222222;
+  --bg-card: #141414;
+  --border-color: #2a2a2a;
+  --border-glow: #1a3a2a;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  --accent-green: #10b981;
+  --accent-green-dim: #0d9668;
+  --accent-green-glow: rgba(16, 185, 129, 0.15);
+  --accent-blue: #60a5fa;
+  --accent-blue-dim: #3b82f6;
+  --accent-blue-glow: rgba(96, 165, 250, 0.12);
+  --accent-red: #ef4444;
+  --accent-yellow: #f59e0b;
+  --terminal-bg: #0d1117;
+  --terminal-header: #1a1a2e;
+  --terminal-dot-red: #ff5f56;
+  --terminal-dot-yellow: #ffbd2e;
+  --terminal-dot-green: #27c93f;
+  --tag-bg: rgba(16, 185, 129, 0.08);
+  --tag-text: #10b981;
+  --tag-border: rgba(16, 185, 129, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6);
+  --shadow-glow-green: 0 0 30px rgba(16, 185, 129, 0.08);
+  --shadow-glow-blue: 0 0 30px rgba(96, 165, 250, 0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --header-height: 68px;
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f0f0f0;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f5f5f5;
+  --bg-card: #ffffff;
+  --border-color: #e5e5e5;
+  --border-glow: #d1fae5;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --accent-green: #059669;
+  --accent-green-glow: rgba(5, 150, 105, 0.08);
+  --accent-blue: #2563eb;
+  --accent-blue-glow: rgba(37, 99, 235, 0.06);
+  --terminal-bg: #f8fafc;
+  --terminal-header: #e2e8f0;
+  --tag-bg: rgba(5, 150, 105, 0.06);
+  --tag-text: #059669;
+  --tag-border: rgba(5, 150, 105, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--bg-surface-hover); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-green-dim); }
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--header-height);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+[data-theme="light"] .nav { background: rgba(250, 250, 250, 0.85); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  height: 100%; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700;
+  color: var(--accent-green); text-decoration: none; display: flex; align-items: center; gap: 4px;
+}
+.nav-logo .prompt { font-size: 1.5rem; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;
+  font-weight: 500; transition: color 0.2s; font-family: 'Inter', sans-serif; letter-spacing: -0.01em;
+}
+.nav-links a:hover { color: var(--accent-green); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.nav-social { display: flex; gap: 8px; }
+.nav-social a {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: var(--bg-surface); color: var(--text-secondary); transition: all 0.2s;
+}
+.nav-social a:hover { background: var(--accent-green-glow); color: var(--accent-green); }
+.nav-social svg { width: 18px; height: 18px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif; font-size: 0.8125rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.2s ease; white-space: nowrap; letter-spacing: -0.01em;
+}
+.btn-primary {
+  background: var(--accent-green); color: #000;
+}
+.btn-primary:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(16,185,129,0.3); }
+.btn-secondary {
+  background: transparent; color: var(--accent-green);
+  border: 1.5px solid var(--accent-green);
+}
+.btn-secondary:hover { background: var(--accent-green-glow); }
+.btn-ghost {
+  background: transparent; color: var(--text-secondary); padding: 8px 12px;
+}
+.btn-ghost:hover { color: var(--text-primary); background: var(--bg-surface); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: var(--bg-surface); border: 1px solid var(--border-color);
+  color: var(--text-secondary); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem; transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--accent-green); color: var(--accent-green); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 8px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px; background: var(--text-primary);
+  border-radius: 2px; transition: all 0.3s;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 100px 24px;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent-green); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
+  margin-bottom: 16px; color: var(--text-primary);
+}
+.section-subtitle {
+  font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
+}
+
+/* ===== HERO / TERMINAL ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: calc(var(--header-height) + 60px) 24px 100px;
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 100% 80% at 50% 30%, rgba(16,185,129,0.03) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 60% at 80% 50%, rgba(96,165,250,0.02) 0%, transparent 60%);
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-terminal {
+  background: var(--terminal-bg); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-green);
+  position: relative;
+}
+.terminal-header {
+  background: var(--terminal-header); padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border-color);
+}
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.terminal-dot.red { background: var(--terminal-dot-red); }
+.terminal-dot.yellow { background: var(--terminal-dot-yellow); }
+.terminal-dot.green { background: var(--terminal-dot-green); }
+.terminal-title {
+  flex: 1; text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--text-muted);
+}
+.terminal-body {
+  padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  line-height: 1.8; color: var(--text-secondary); position: relative;
+}
+.terminal-body .line { display: flex; gap: 8px; align-items: flex-start; }
+.terminal-body .prompt-char { color: var(--accent-green); font-weight: 700; flex-shrink: 0; }
+.terminal-body .cmd { color: var(--accent-blue); }
+.terminal-body .output { color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.95rem; margin-bottom: 4px; }
+.terminal-body .output.dim { color: var(--text-secondary); font-size: 0.85rem; font-family: 'Inter', sans-serif; }
+.terminal-code-bg {
+  position: absolute; right: -40px; top: 20px; opacity: 0.03;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--accent-green);
+  pointer-events: none; user-select: none; white-space: pre; line-height: 1.4;
+  max-width: 300px; overflow: hidden;
+}
+[data-theme="light"] .terminal-code-bg { opacity: 0.06; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 20px;
+  background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2);
+  font-size: 0.8rem; font-weight: 600; color: var(--accent-green);
+  margin-bottom: 24px;
+}
+.hero-badge .pulse {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+.hero-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--text-primary); margin-bottom: 20px;
+}
+.hero-title .highlight { color: var(--accent-green); }
+.hero-desc {
+  font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px;
+  line-height: 1.7; max-width: 520px;
+}
+.hero-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
+.hero-stat {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: var(--radius-md);
+  background: var(--bg-surface); border: 1px solid var(--border-color);
+  font-size: 0.8rem; font-weight: 600; color: var(--text-primary);
+}
+.hero-stat .stat-icon { font-size: 1rem; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===== TRUST BAR ===== */
+.trust-bar {
+  padding: 48px 24px; border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+.trust-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; align-items: center; gap: 48px;
+}
+.trust-label {
+  font-size: 0.8rem; color: var(--text-muted); font-weight: 500;
+  white-space: nowrap; letter-spacing: 0.02em;
+}
+.trust-logos { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
+.trust-logo {
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0.5; transition: opacity 0.3s;
+  font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem;
+  color: var(--text-secondary);
+}
+.trust-logo:hover { opacity: 0.85; }
+.trust-logo svg { width: 28px; height: 28px; }
+
+/* ===== SERVICES ===== */
+.services-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px;
+}
+.service-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 36px;
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+  opacity: 0; transition: opacity 0.3s;
+}
+.service-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow-green);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card.cta-card {
+  background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(96,165,250,0.05));
+  border-color: rgba(16,185,129,0.2);
+}
+.service-icon {
+  font-size: 1.6rem; margin-bottom: 16px; display: block;
+}
+.service-card h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 8px; color: var(--text-primary);
+}
+.service-card p {
+  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px;
+}
+.service-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.service-tag {
+  display: inline-block; padding: 4px 10px; border-radius: 4px;
+  background: var(--tag-bg); color: var(--tag-text);
+  border: 1px solid var(--tag-border);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600;
+}
+
+/* ===== CASE STUDIES ===== */
+.cases-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+}
+.case-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 32px;
+  transition: all 0.3s ease; position: relative;
+}
+.case-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow-blue);
+}
+.case-metric {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem; font-weight: 700; color: var(--accent-green);
+  margin-bottom: 16px; letter-spacing: -0.02em;
+}
+.case-card h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700;
+  margin-bottom: 8px; color: var(--text-primary);
+}
+.case-card p {
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;
+}
+.case-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+
+/* ===== CREDENTIALS ===== */
+.creds-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px; margin-top: 36px;
+}
+.cred-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 20px; text-align: center;
+  transition: all 0.3s ease; text-decoration: none; display: block;
+}
+.cred-card:hover {
+  border-color: var(--accent-green); box-shadow: var(--shadow-sm), var(--shadow-glow-green);
+}
+.cred-card .cred-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.cred-card .cred-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+  font-weight: 700; color: var(--text-primary);
+}
+.cred-card .cred-desc {
+  font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;
+}
+.creds-footer {
+  text-align: center; margin-top: 28px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* ===== BLOG ===== */
+.blog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+}
+.blog-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 28px; transition: all 0.3s ease;
+  text-decoration: none; display: flex; flex-direction: column;
+}
+.blog-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.blog-card .blog-date {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.blog-card h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--text-primary); line-height: 1.4; margin-bottom: 8px;
+}
+.blog-card p {
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+  margin-bottom: 16px; flex: 1;
+}
+.blog-read-more {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent-green); font-weight: 600; margin-top: auto;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+}
+.testimonial-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 32px;
+  transition: all 0.3s ease; display: flex; flex-direction: column;
+}
+.testimonial-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-md);
+}
+.testimonial-card .quote-mark {
+  font-family: 'Outfit', sans-serif; font-size: 3rem; color: var(--accent-green);
+  line-height: 1; opacity: 0.3; margin-bottom: 8px;
+}
+.testimonial-card blockquote {
+  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;
+  font-style: italic; margin-bottom: 20px; flex: 1;
+}
+.testimonial-card .author-name {
+  font-weight: 700; font-size: 0.9rem; color: var(--text-primary);
+}
+.testimonial-card .author-role {
+  font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* ===== CONTACT ===== */
+.contact-wrapper {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px;
+}
+.contact-info h3 {
+  font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700;
+  margin-bottom: 12px; color: var(--text-primary);
+}
+.contact-info p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
+.contact-detail {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  color: var(--text-secondary); font-size: 0.9rem;
+}
+.contact-detail svg { width: 18px; height: 18px; color: var(--accent-green); flex-shrink: 0; }
+.contact-form {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg); padding: 36px;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  font-weight: 600; color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 8px;
+}
+.form-input, .form-textarea {
+  width: 100%; padding: 12px 16px;
+  background: var(--bg-primary); border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-family: 'Inter', sans-serif; font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+  width: 100%; padding: 14px; background: var(--accent-green); color: #000;
+  border: none; border-radius: var(--radius-sm); cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.05em; transition: all 0.2s;
+}
+.form-submit:hover { background: #34d399; box-shadow: 0 4px 20px rgba(16,185,129,0.3); }
+.honeypot { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
+.form-success {
+  display: none; text-align: center; padding: 40px 20px;
+}
+.form-success h3 { color: var(--accent-green); font-family: 'Outfit', sans-serif; margin-bottom: 8px; }
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid var(--border-color); padding: 40px 24px;
+  background: var(--bg-secondary);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+.footer-back {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--text-muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-back:hover { color: var(--accent-green); }
+.footer-back svg { width: 16px; height: 16px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-terminal { max-width: 560px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact-wrapper { grid-template-columns: 1fr; }
+  .trust-inner { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .trust-logos { gap: 32px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: var(--header-height); left: 0; right: 0;
+    background: var(--bg-primary); border-bottom: 1px solid var(--border-color);
+    padding: 20px 24px; gap: 16px; z-index: 999;
+  }
+  .hamburger { display: flex; }
+  .nav-actions .btn-secondary { display: none; }
+  .hero { padding-top: calc(var(--header-height) + 40px); }
+  .hero-stats { flex-direction: column; }
+  .creds-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+  .section { padding: 60px 20px; }
+}
+@media (max-width: 480px) {
+  .nav-inner { padding: 0 16px; }
+  .nav-social { display: none; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .creds-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span class="prompt">&gt;</span> DV</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#work" onclick="closeMenu()">Work</a></li>
+      <li><a href="#blog" onclick="closeMenu()">Blog</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="nav-social">
+        <a href="https://github.com/danielcvlad" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/dancvlad" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+      <a href="CV_Daniel_Vlad.pdf" class="btn btn-secondary" download>DOWNLOAD CV</a>
+      <a href="#contact" class="btn btn-primary">FREE AUDIT</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark mode">☀️</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO / TERMINAL ===== -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse"></span> AVAILABLE FOR PROJECTS
+        </div>
+        <h1 class="hero-title">
+          I help engineering teams <span class="highlight">ship on Azure</span> without rebuilding their stack.
+        </h1>
+        <p class="hero-desc">
+          4+ years shipping infrastructure for Microsoft, Roland Berger, and Orange. 6 Azure certifications. Based in Munich — working globally.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="stat-icon">⚡</span> ↓70% deployment time</div>
+          <div class="hero-stat"><span class="stat-icon">🎓</span> 6 Azure certs</div>
+          <div class="hero-stat"><span class="stat-icon">☁️</span> 500+ DevBox environments</div>
+        </div>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary" style="padding:14px 28px;font-size:0.9rem;">BOOK YOUR FREE AUDIT →</a>
+          <a href="#work" class="btn btn-secondary" style="padding:14px 28px;font-size:0.9rem;">SEE MY WORK</a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">daniel@azure — zsh — 80×24</span>
+        </div>
+        <div class="terminal-body">
+          <div class="line"><span class="prompt-char">❯</span> <span class="cmd">whoami</span></div>
+          <div class="line"><span class="output">Daniel Vlad. DevOps Engineer. Former Microsoft.</span></div>
+          <div class="line" style="margin-top:12px;"><span class="prompt-char">❯</span> <span class="cmd">cat ~/specialties.txt</span></div>
+          <div class="line"><span class="output">Azure · Kubernetes · Terraform · Bicep · CI/CD</span></div>
+          <div class="line" style="margin-top:12px;"><span class="prompt-char">❯</span> <span class="cmd">az certification list --query "[].name"</span></div>
+          <div class="line"><span class="output dim">AZ-400 · AZ-305 · AZ-500 · AZ-104 · AZ-140 · AZ-900</span></div>
+          <div class="line" style="margin-top:12px;"><span class="prompt-char">❯</span> <span class="cmd">echo $LOCATION</span></div>
+          <div class="line"><span class="output">Munich, Germany — Remote // Global</span></div>
+          <div class="line" style="margin-top:16px;"><span class="prompt-char">❯</span> <span class="cmd">_</span> <span style="animation: blink 1s step-end infinite;color:var(--accent-green);">█</span></div>
+        </div>
+        <div class="terminal-code-bg">resource "azurerm_kubernetes_cluster" "aks" {<br>  name                = "prod-aks"<br>  location            = "westeurope"<br>  resource_group_name = "prod-rg"<br>  dns_prefix          = "prod-aks"<br><br>  default_node_pool {<br>    name       = "default"<br>    node_count = var.node_count<br>    vm_size    = "Standard_D4s_v5"<br>    enable_auto_scaling = true<br>    min_count  = 3<br>    max_count  = 20<br>  }<br><br>  identity {<br>    type = "SystemAssigned"<br>  }<br><br>  network_profile {<br>    network_plugin = "azure"<br>    network_policy = "calico"<br>  }<br>}<br><br>module "networking" {<br>  source              = "./modules/networking"<br>  vnet_address_space  = ["10.0.0.0/16"]<br>  subnet_prefixes     = ["10.0.1.0/24", "10.0.2.0/24"]<br>}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="trust-bar">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by engineers at:</span>
+    <div class="trust-logos">
+      <div class="trust-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zm12.6 0H12.6V0H24v11.4z"/></svg>
+        Microsoft
+      </div>
+      <div class="trust-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3"/><rect x="6" y="6" width="5" height="12" rx="1" fill="var(--bg-primary)"/><rect x="13" y="9" width="5" height="9" rx="1" fill="var(--bg-primary)"/></svg>
+        Roland Berger
+      </div>
+      <div class="trust-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg>
+        Orange
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="section" id="services">
+  <div class="section-label">What I Solve</div>
+  <h2 class="section-title">Infrastructure problems that slow your team down — solved.</h2>
+  <p class="section-subtitle">Four areas where I deliver measurable impact. No fluff. No billable hours for "discovery."</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🚀</span>
+      <h3>CI/CD That Ships</h3>
+      <p>Your pipelines are slow, fragile, and nobody trusts them. I rebuild them to deploy in minutes — with parallel jobs, automated testing, and zero-downtime rollouts.</p>
+      <div class="service-tags">
+        <span class="service-tag">Jenkins</span>
+        <span class="service-tag">GitHub Actions</span>
+        <span class="service-tag">Azure DevOps</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">☁️</span>
+      <h3>Cloud That Scales</h3>
+      <p>You're on-prem or half-migrated and burning cash. I architect Azure-native environments that scale down when idle and up when needed — infrastructure as code, every time.</p>
+      <div class="service-tags">
+        <span class="service-tag">Terraform</span>
+        <span class="service-tag">Bicep</span>
+        <span class="service-tag">AKS</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔐</span>
+      <h3>Security That Passes Audits</h3>
+      <p>Your compliance checklist keeps growing. I bake security into the pipeline — secrets management, zero-trust networking, and policy-as-code that auditors actually respect.</p>
+      <div class="service-tags">
+        <span class="service-tag">HashiCorp Vault</span>
+        <span class="service-tag">Azure Policy</span>
+        <span class="service-tag">Sentinel</span>
+      </div>
+    </div>
+    <div class="service-card cta-card">
+      <span class="service-icon">📋</span>
+      <h3>Free Infrastructure Audit</h3>
+      <p>30 minutes. Your pipeline. 3 concrete improvements you can implement today — whether you hire me or not. No sales pitch. Just actionable advice from someone who's been in the trenches.</p>
+      <a href="#contact" class="btn btn-primary" style="margin-top:8px;">BOOK FREE AUDIT →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASE STUDIES ===== -->
+<section class="section" id="work" style="background:var(--bg-secondary);max-width:100%;padding-left:calc((100vw - 1200px)/2 + 24px);padding-right:calc((100vw - 1200px)/2 + 24px);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Work that made a difference.</h2>
+    <p class="section-subtitle">Real projects. Real metrics. Real impact on engineering teams.</p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-metric">↓70%</div>
+        <h3>Enterprise Image Lifecycle</h3>
+        <p>Built global image distribution system using Azure Compute Gallery + Packer. Faster provisioning across 5 regions. Eliminated manual image management for 200+ engineering team.</p>
+        <div class="case-tags">
+          <span class="service-tag">PACKER</span>
+          <span class="service-tag">AZURE</span>
+          <span class="service-tag">GITHUB_ACTIONS</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-metric">↓60%</div>
+        <h3>Microservices on AKS</h3>
+        <p>Architected 50+ microservice deployment on AKS with Helm + ArgoCD. Faster releases. Zero downtime. Self-service deployments for 8 product teams.</p>
+        <div class="case-tags">
+          <span class="service-tag">K8S</span>
+          <span class="service-tag">HELM</span>
+          <span class="service-tag">ARGOCD</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-metric">500+</div>
+        <h3>DevBox Landing Zone</h3>
+        <p>Scalable developer environments using Azure DevCenter + Bicep. On-demand provisioning. Reduced onboarding time from 3 days to under 15 minutes.</p>
+        <div class="case-tags">
+          <span class="service-tag">BICEP</span>
+          <span class="service-tag">AZURE</span>
+          <span class="service-tag">DEVCENTER</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CREDENTIALS ===== -->
+<section class="section" id="credentials">
+  <div class="section-label">Verified Credentials</div>
+  <h2 class="section-title">Microsoft Certified. Six times over.</h2>
+  <p class="section-subtitle">Azure certifications that prove I know the platform inside and out — not just how to pass an exam.</p>
+  <div class="creds-grid">
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/certification/azure-devops-engineer" target="_blank" rel="noopener" class="cred-card">
+      <div class="cred-icon">🏅</div>
+      <div class="cred-name">AZ-400</div>
+      <div class="cred-desc">DevOps Engineer Expert</div>
+    </a>
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/certification/azure-solutions-architect" target="_blank" rel="noopener" class="cred-card">
+      <div class="cred-icon">🏗️</div>
+      <div class="cred-name">AZ-305</div>
+      <div class="cred-desc">Solutions Architect Expert</div>
+    </a>
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/certification/azure-security-engineer" target="_blank" rel="noopener" class="cred-card">
+      <div class="cred-icon">🔐</div>
+      <div class="cred-name">AZ-500</div>
+      <div class="cred-desc">Security Engineer Associate</div>
+    </a>
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/certification/azure-administrator" target="_blank" rel="noopener" class="cred-card">
+      <div class="cred-icon">⚙️</div>
+      <div class="cred-name">AZ-104</div>
+      <div class="cred-desc">Administrator Associate</div>
+    </a>
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/certification/azure-virtual-desktop-specialty" target="_blank" rel="noopener" class="cred-card">
+      <div class="cred-icon">🖥️</div>
+      <div class="cred-name">AZ-140</div>
+      <div class="cred-desc">AVD Specialty</div>
+    </a>
+    <a href="https://learn.microsoft.com/en-us/users/danielvlad/credentials/" target="_blank" rel="noopener" class="cred-card" style="border-color:var(--accent-green);background:var(--accent-green-glow);">
+      <div class="cred-icon">📜</div>
+      <div class="cred-name">View All →</div>
+      <div class="cred-desc">8 certifications total</div>
+    </a>
+  </div>
+  <p class="creds-footer">$ echo "8 certifications. 4+ years. Zero guesswork."</p>
+</section>
+
+<!-- ===== BLOG PREVIEW ===== -->
+<section class="section" id="blog" style="background:var(--bg-secondary);max-width:100%;padding-left:calc((100vw - 1200px)/2 + 24px);padding-right:calc((100vw - 1200px)/2 + 24px);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Writing</div>
+    <h2 class="section-title">Thoughts on infrastructure, automation, and Azure.</h2>
+    <p class="section-subtitle">Things I've learned shipping infrastructure in production. No fluff — just real experience.</p>
+    <div class="blog-grid">
+      <a href="#" class="blog-card">
+        <div class="blog-date">2026-04-15</div>
+        <h3>How I Cut Deployment Time by 70% with Azure DevOps</h3>
+        <p>Parallel jobs, staged deployments, and the one YAML change that eliminated 90% of our flaky pipeline failures.</p>
+        <div class="case-tags" style="margin-bottom:12px;">
+          <span class="service-tag">AZURE_DEVOPS</span>
+          <span class="service-tag">CI/CD</span>
+        </div>
+        <span class="blog-read-more">Read more →</span>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-date">2026-03-02</div>
+        <h3>Terraform vs Bicep: When to Use Which</h3>
+        <p>After deploying hundreds of Azure resources with both, here's my decision framework — and why the answer isn't "just pick one."</p>
+        <div class="case-tags" style="margin-bottom:12px;">
+          <span class="service-tag">TERRAFORM</span>
+          <span class="service-tag">BICEP</span>
+        </div>
+        <span class="blog-read-more">Read more →</span>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-date">2026-02-10</div>
+        <h3>Lessons from Deploying 500+ DevBox Environments</h3>
+        <p>What breaks at scale, the networking gotchas nobody documents, and how we achieved sub-15-minute developer onboarding.</p>
+        <div class="case-tags" style="margin-bottom:12px;">
+          <span class="service-tag">AZURE</span>
+          <span class="service-tag">DEVCENTER</span>
+        </div>
+        <span class="blog-read-more">Read more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section" id="testimonials">
+  <div class="section-label">Testimonials</div>
+  <h2 class="section-title">What people I've worked with say.</h2>
+  <p class="section-subtitle">Direct feedback from engineering leaders I've shipped infrastructure alongside.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>One of the sharpest DevOps engineers I've worked with. Daniel rebuilt our CI/CD pipelines from the ground up and cut deployment times by over 60%. He doesn't just write code — he understands the business impact of every architectural decision.</blockquote>
+      <div class="author-name">Mihai Popescu</div>
+      <div class="author-role">Engineering Manager, Roland Berger</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>Daniel doesn't just automate — he thinks strategically about infrastructure. During our time at Microsoft, I watched him turn a chaotic multi-region deployment process into a single-command operation. Any team would be lucky to have him.</blockquote>
+      <div class="author-name">Alexandra Ionescu</div>
+      <div class="author-role">CTO, Former Colleague at Microsoft</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="quote-mark">"</div>
+      <blockquote>Daniel is an asset to any team! He mentored our team through complex IaC implementations and never made anyone feel like their questions were too basic. The infrastructure he built is still running flawlessly two years later.</blockquote>
+      <div class="author-name">Cristina Stan</div>
+      <div class="author-role">Senior Infrastructure Engineer, Orange Romania</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section" id="contact" style="background:var(--bg-secondary);max-width:100%;padding-left:calc((100vw - 1200px)/2 + 24px);padding-right:calc((100vw - 1200px)/2 + 24px);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Let's Talk</div>
+    <h2 class="section-title">Ready to ship faster?</h2>
+    <p class="section-subtitle">Tell me about your infrastructure. I'll tell you what I'd fix first — free.</p>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Get in touch</h3>
+        <p>I respond within 24 hours. No automated replies — you'll hear from me directly. Whether you need a full pipeline overhaul or just a second opinion on your architecture, I'm happy to talk.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contact@danielvlad.com
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +49 1517 2640867
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Munich, Germany — Remote // Global
+        </div>
+      </div>
+      <div class="contact-form" id="contactFormWrapper">
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="access_key" value="39325897-8e94-46da-b9b8-ac7d6853c960">
+          <input type="hidden" name="subject" value="New message from danielvlad.com">
+          <input type="hidden" name="from_name" value="Daniel Vlad Portfolio Contact">
+          <input type="hidden" name="redirect" value="false">
+          <div class="honeypot">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your infrastructure, your pain points, and what you're trying to achieve..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">DEPLOY MESSAGE ⏎</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3>✓ Message Deployed</h3>
+          <p style="color:var(--text-secondary);">Thanks for reaching out! I'll get back to you within 24 hours — no automated replies, I promise.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-copy">© 2026 Daniel Vlad. Built with vim and black coffee.</div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="https://github.com/danielcvlad" target="_blank" rel="noopener" class="footer-back" style="justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/dancvlad" target="_blank" rel="noopener" class="footer-back" style="justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <a href="#" class="footer-back">↑ Back to top</a>
+  </div>
+</footer>
+
+<script>
+/* ===== THEME TOGGLE ===== */
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', theme);
+}
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+setTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+/* ===== MOBILE MENU ===== */
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+/* ===== SMOOTH SCROLL FOR NAV OFFSET ===== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      const offset = 80;
+      const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: pos, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ===== SCROLL ANIMATIONS ===== */
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.service-card, .case-card, .cred-card, .blog-card, .testimonial-card').forEach(el => {
+  el.classList.add('animate');
+  el.style.animationPlayState = 'paused';
+  observer.observe(el);
+});
+
+/* ===== CONTACT FORM ===== */
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+  const submitBtn = form.querySelector('.form-submit');
+  submitBtn.textContent = 'DEPLOYING...';
+  submitBtn.disabled = true;
+
+  fetch(form.action, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      alert('Something went wrong. Please email me directly at contact@danielvlad.com');
+      submitBtn.textContent = 'DEPLOY MESSAGE ⏎';
+      submitBtn.disabled = false;
+    }
+  })
+  .catch(() => {
+    alert('Network error. Please email me directly at contact@danielvlad.com');
+    submitBtn.textContent = 'DEPLOY MESSAGE ⏎';
+    submitBtn.disabled = false;
+  });
+}
+
+/* ===== BLINK CURSOR ===== */
+const style = document.createElement('style');
+style.textContent = '@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }';
+document.head.appendChild(style);
+
+/* ===== NAV SHADOW ON SCROLL ===== */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 10) {
+    nav.style.boxShadow = '0 1px 20px rgba(0,0,0,0.3)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
